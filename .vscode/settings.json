@@ -1,0 +1,7 @@
+{
+    "files.associations": {
+        "*.js": "javascript",
+        "string": "cpp"
+    },
+    "search.useGlobalIgnoreFiles": true
+}

@@ -1,0 +1,36 @@
+@import 'bootstrap/dist/css/bootstrap.css';
+
+
+.form {
+  width: 600px;
+  margin: auto;
+  padding: 3rem 2rem;
+  form {
+    background: #ffffff;
+    border-radius: 10px;
+    padding: 2rem;
+    #sendmessage {
+      color: #007bff;
+      border: 1px solid #007bff;
+      display: none;
+      text-align: center;
+      padding: 15px;
+      font-weight: 600;
+      margin-bottom: 15px;
+    }
+    #errormessage {
+      color: red;
+      display: none;
+      border: 1px solid red;
+      text-align: center;
+      padding: 15px;
+      font-weight: 600;
+      margin-bottom: 15px;
+    }
+    #sendmessage, #errormessage{
+      &.show {
+        display: block;
+      }
+    }
+  }
+}
