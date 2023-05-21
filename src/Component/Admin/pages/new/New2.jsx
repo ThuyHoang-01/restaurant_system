@@ -85,7 +85,7 @@ const ListBlog = () => {
               </Button>
               <Button
                 onClick={() => {
-                  swal("Thông báo", "Are you sure want to delete this blog ?", {
+                  swal("Thông báo", "Bạn có muốn xóa bài viết này không ?", {
                     buttons: {
                       delete: "Delete",
                       cancel: "Cancel",
@@ -94,7 +94,7 @@ const ListBlog = () => {
                     if (value === "delete") {
                       await delete_blog(params.row?.id);
                       handleDelete(params.row.id);
-                      swal("Thông báo", "Deleted", "success");
+                      swal("Thông báo", "Đã xóa bài viết thành công", "success");
                       setChange((prev) => !prev);
                     } else {
                       return null;

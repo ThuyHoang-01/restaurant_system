@@ -85,6 +85,8 @@ const DishAdmin  = () => {
                   if (value === "delete") {
                     await delete_dish(params.row?.id);
                     handleDelete(params.row.id);
+                    swal("Thông báo", "Xóa món ăn thành công", "success")
+                    .then(()=> setChange(!change))
                   } else {
                     return null;
                   }

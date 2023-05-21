@@ -65,16 +65,17 @@ export default function EditPayment(props) {
                     className={"wrap-mode-deposit"}
                     labelId="demo-simple-select-label"
                     id="demo-simple-select"
+                    defaultValue=""
                     value={deposit}
-                    label="Age"
+                    label="Cọc"
                     onChange={handleChange}
                     renderValue={()=> {
                       return deposit=== 1 ? "Đã đặt cọc" : "Chưa đặt cọc"
                     }}
                   >
                     <div style={{display: "flex", flexDirection: "column", justifyContent: "flex-start", alignItems: "flex-start", gap: 10}}>
-                    <MenuItem className={"i-dep"} style={{padding: 10}} value={1}>Đã đặt cọc</MenuItem>
-                    <MenuItem className={"i-dep"} style={{padding: 10}} value={0}>Chưa đặt cọc</MenuItem>
+                    <MenuItem className={"i-dep"} onClick={()=> setDeposit(1)} style={{padding: 10}} value={1}>Đã đặt cọc</MenuItem>
+                    <MenuItem className={"i-dep"} onClick={()=> setDeposit(0)} style={{padding: 10}} value={0}>Chưa đặt cọc</MenuItem>
                     </div>
                   </Select>
                 </FormControl>

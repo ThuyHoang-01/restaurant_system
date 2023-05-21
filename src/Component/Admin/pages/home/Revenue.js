@@ -8,6 +8,7 @@ import { Box } from '@mui/material';
 import _ from 'lodash';
 import { DataGrid } from "@material-ui/data-grid";
 import moment from 'moment';
+import numberWithCommas from '../../../util/numberThousandSeparator';
 
 const Revenue = () => {
   const [data, setData]= useState([])
@@ -195,7 +196,7 @@ const Revenue = () => {
                 autoWidth
             />
             <br />
-            <Box sx={{width: '100%', direction: "rtl"}}>Tổng doanh thu: <strong>{total+ "VNĐ" || "_"}</strong></Box>
+            <Box sx={{width: '100%', direction: "rtl"}}>Tổng doanh thu: <strong>{numberWithCommas(total)+ "VNĐ" || "_"}</strong></Box>
         </Box>
         </div>
     </div>

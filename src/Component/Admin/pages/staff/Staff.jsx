@@ -9,6 +9,7 @@ import UpdateStaff from "./UpdateStaff";
 import AddStaff from "./AddStaff";
 import Fuse from "fuse.js"
 import { SearchBar } from "../dish/DishAdmin";
+import delete_staff from "../../../../api/admin/delete_staff";
 
 export default function StaffList() {
   const [data, setData] = useState([]);
@@ -80,8 +81,10 @@ export default function StaffList() {
                 }})
                 .then(async value=> {
                   if(value=== "delete") {
-                    await delete_user(params.row?.id)
-                    handleDelete(params.row.id)
+                    const reuslt= await delete_staff(params.row?.id)
+                    // handleDelete(params.row.id)
+                    swal("Thông báo", "Xóa nhân viên thành công", "success")
+                    .then(()=> setChange(!change))
                   } 
                   else {
                     return null

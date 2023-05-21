@@ -74,7 +74,7 @@ const MenuAdmin = () => {
       renderCell: (params) => {
         return (
           <>
-            <UpdateMenu {...params.row} setChange={setChange} />
+            <UpdateMenu {...params.row}  setChange={setChange} />
             <DeleteOutline
               className="userListDelete"
               onClick={() => {
@@ -87,6 +87,8 @@ const MenuAdmin = () => {
                   if (value === "delete") {
                     await delete_menu(params.row?.id);
                     handleDelete(params.row.id);
+                    swal("Thông báo", "Xóa menu thành công", "success")
+                    .then(()=> setChange(!change))
                   } else {
                     return null;
                   }

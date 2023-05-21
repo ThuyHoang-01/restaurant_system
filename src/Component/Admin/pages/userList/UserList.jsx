@@ -75,6 +75,8 @@ export default function UserList() {
                   if(value=== "delete") {
                     await delete_user(params.row?.id)
                     handleDelete(params.row.id)
+                    swal("Thông báo", "Xóa người dùng thành công", "success")
+                    .then(()=> setChange(!change))
                   } 
                   else {
                     return null

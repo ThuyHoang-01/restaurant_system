@@ -121,7 +121,7 @@ const Login = (props) => {
                           }}
                           type="submit"
                           name="submit"
-                          value={"Login"}
+                          value={"Đăng nhập"}
                           className="input-submit"
                           defaultValue="Đăng nhập"
                         />
@@ -216,7 +216,7 @@ const Login = (props) => {
                           }}
                           type="submit"
                           name="submit"
-                          value={"Login"}
+                          value={"Đăng nhập"}
                           className="input-submit"
                           defaultValue="Đăng nhập"
                         />
@@ -344,7 +344,7 @@ const Login = (props) => {
                           }}
                           type="submit"
                           name="submit"
-                          value={"Login"}
+                          value={"Đăng nhập"}
                           className="input-submit"
                           defaultValue="Đăng nhập"
                         />

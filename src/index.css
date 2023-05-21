@@ -50,7 +50,7 @@ code {
   color: #2e89ff !important
 }
 
-.wrap-mode-deposit ul {
+/* .wrap-mode-deposit ul {
   display: flex !important;
   justify-content: center;
   flex-direction: column;
@@ -59,7 +59,7 @@ code {
 .MuiList-root {
   display: flex !important;
   flex-direction: column
-}
+} */
 
 .swal2-modal, .swal2-popup {
   z-index: 999999999 !important;

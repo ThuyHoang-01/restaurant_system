@@ -145,7 +145,7 @@ const Payment = () => {
       field: "paid",
       headerName: "Thanh toán",
       width: 200,
-      flex: 1,
+      flex: 1.5,
       renderCell: (params) => {
         return (
           <>
@@ -185,7 +185,7 @@ const Payment = () => {
                   }
                 }
               })
-            }} type={"primary"}>Xác nhận đã thanh toán</Button>}
+            }} type={"primary"} style={{fontSize: 14}}>Xác nhận đã thanh toán</Button>}
           </>
         );
       },

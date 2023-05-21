@@ -16,11 +16,11 @@ import {
   Select,
   TextField,
 } from "@mui/material";
-import update_user from "../../../../api/admin/update_user";
+// import update_user from "../../../../api/admin/update_user";
 import { Button } from "antd";
 import UploadImage from "../../../UploadImage/UploadImage";
 import get_list_dish from "../../../../api/admin/get_list_dish";
-import update_menu from "../../../../api/menu/update_menu";
+// import update_menu from "../../../../api/menu/update_menu";
 import add_menu from "../../../../api/menu/add_menu";
 import upload_image from "../../../../api/upload_image";
 
