@@ -138,6 +138,10 @@ export default function AddStaff(props) {
                 return swal("Thông báo", "Mật khẩu quá yếu, mật khẩu phải gồm ít nhất 8 ký tự gồm chữ số, chữ hoa, chữ thường", "error")
 
               }
+              if(isValidMobile(phone)=== false) {
+                return swal("Thông báo", "Số điện thoại không hợp lệ, thử lại", "error")
+
+              }
               // const finalImage = await upload_image(image?.thumbUrl);
               const result = await add_staff(
                 firstName,

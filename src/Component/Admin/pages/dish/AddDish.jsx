@@ -95,6 +95,15 @@ export default function AddDish(props) {
           <Button
             type={"primary"}
             onClick={async () => {
+              if(dishName.length <= 0) {
+                return swal("Thông báo", "Tên món ăn không được để trống", "error")
+              }
+              if(dishDescription.length <= 0) {
+                return swal("Thông báo", "Mô tả món ăn không được để trống", "error")
+              }
+              if(dishPrice.length <= 0) {
+                return swal("Thông báo", "Giá món ăn không được để trống", "error")
+              }
               const finalImage = await upload_image(image?.thumbUrl);
               const result = await add_dish(
                 dishName,

@@ -133,6 +133,12 @@ export default function AddMenu(props) {
           <Button
             type={"primary"}
             onClick={async () => {
+              if(menuName.length <= 0) {
+                return swal("Thông báo", "Tên menu không được để trống", "error")
+              }
+              if(menuDescription.length <= 0) {
+                return swal("Thông báo", "Mô tả menu không được để trống", "error")
+              }
               const finalImage = await upload_image(image?.thumbUrl);
               const result = await add_menu(
                 menuName,
