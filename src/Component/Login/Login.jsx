@@ -60,6 +60,8 @@ const Login = (props) => {
                           className="input-field"
                           placeholder="Email"
                         />
+                        {(email.length)<= 0 && <div style={{marginTop: 6, color: "#f00", padding: 16}}>Tài khoản không được để trống</div>}
+
                       </div>
                       <div className="input-control">
                         <label
@@ -78,6 +80,8 @@ const Login = (props) => {
                           className="input-field"
                           placeholder="Password"
                         />
+                        {(password.length)<= 0 && <div style={{marginTop: 6, color: "#f00", padding: 16}}>Tài khoản không được để trống</div>}
+
                       </div>
                       <div className="input-control">
                         <a

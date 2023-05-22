@@ -19,7 +19,14 @@ const AboutUs = () => {
     </>
   )
 }
+export const isValidEmail = (email) => {
+  return /^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[A-Za-z]+$/.test(email);
+};
 
+export  const isValidMobile = (mobileno) => {
+  const phoneRegex = /^\d{10}$/;
+  return phoneRegex.test(mobileno);
+};
 const Contact = () => {
   const [contactData, setContactData] = useState({});
   const [errorMsg, setErrorMsg] = useState();
@@ -29,14 +36,9 @@ const Contact = () => {
   const isValidName= (name)=> {
     return name?.length >= 6 ? true : false
   }
-  const isValidEmail = (email) => {
-    return /^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[A-Za-z]+$/.test(email);
-  };
+  
 
-  const isValidMobile = (mobileno) => {
-    const phoneRegex = /^\d{10}$/;
-    return phoneRegex.test(mobileno);
-  };
+ 
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -94,47 +96,55 @@ const Contact = () => {
               </div>
               <div className="form-group">
                 <input
+                  required
                   name="name"
                   type="text"
                   className="form-control"
-                  placeholder="Họ và tên"
+                  placeholder="Họ và tên*"
                   value={contactData.name || ""}
                   onChange={(e) => handleChange(e)}
                 />
+                {isValidName(contactData.name)=== false && <div style={{marginTop: 6, color: "#f00"}}>Tên phải có ít nhất 6 ký tự</div>}
               </div>
               <br />
               <div className="form-group">
                 <input
+                  required
                   name="mobile"
                   type="text"
                   maxLength={10}
                   className="form-control"
-                  placeholder="Điện thoại"
+                  placeholder="Điện thoại*"
                   value={contactData.mobile || ""}
                   onChange={(e) => handleChange(e)}
                 />
+                {isValidMobile(contactData.mobile)=== false && <div style={{marginTop: 6, color: "#f00"}}>Số điện thoại không hợp lệ</div>}
               </div>
               <br />
               <div className="form-group">
                 <input
+                  required
                   name="email"
                   type="email"
                   className="form-control"
-                  placeholder="Email"
+                  placeholder="Email*"
                   value={contactData.email || ""}
                   onChange={(e) => handleChange(e)}
                 />
+                {isValidEmail(contactData.email)=== false && <div style={{marginTop: 6, color: "#f00"}}>Email không hợp lệ</div>}
               </div>
               <br />
               <div className="form-group">
                 <input
+                  required
                   name="message"
                   type="text"
                   className="form-control"
-                  placeholder="Số lượng khách"
+                  placeholder="Số lượng khách*"
                   value={guest}
                   onChange={(e) => setGuest(e.target.value)}
                 />
+                {guest.length <= 0 && <div style={{marginTop: 6, color: "#f00"}}>Không được để trống trường này</div>}
               </div>
               <br />
               <div className="form-group">
@@ -146,6 +156,7 @@ const Contact = () => {
                   value={type}
                   onChange={(e) => setType(e.target.value)}
                 />
+                {type.length <= 0 && <div style={{marginTop: 6, color: "#f00"}}>Không được để trống trường này</div>}
               </div>
               <br />
               <p className="text-right mb-0">

@@ -76,6 +76,8 @@ export default function AddMenu(props) {
               onChange={(e) => setMenuName(e.target.value)}
               placeholder={"Tên menu"}
             />
+            {menuName.length <=0 && <div style={{marginTop: 6, color: "#f00", padding: 16}}>Tên menu không được để trống</div>}
+
             <div></div>
             <br />
             <div></div>
@@ -85,6 +87,8 @@ export default function AddMenu(props) {
               onChange={(e) => setMenuDescription(e.target.value)}
               placeholder={"Mô tả"}
             />
+            {menuDescription.length <=0 && <div style={{marginTop: 6, color: "#f00", padding: 16}}>Mô tả menu không được để trống</div>}
+            
             <div></div>
             <br />
             <div></div>

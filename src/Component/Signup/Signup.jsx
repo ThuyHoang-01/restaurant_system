@@ -8,6 +8,7 @@ import { Button } from '@mui/material'
 import verify_email from '../../api/verify_email'
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import validateEmail from '../util/validateEmail'
+import { isValidEmail } from '../Home/AboutUs/AboutUs'
 
 const Signup = () => {
   const [email, setEmail]= useState("")
@@ -26,7 +27,7 @@ const Signup = () => {
     <div>
         <div style={{position: "absolute", left: "50%", top: "50%", transform: "translate(-50%, -50%)", zIndex: 1000, width: "100%", padding: 10, marginTop: 50}}>
             <main className="main">
-                <div className="container">
+                <div className="container" style={{justifyContent: "flex-start", marginTop: 400}}>
                 {open=== false &&  <section className="wrapper">
                     <div className="heading">
                     <h1 className="text text-large">Đăng ký</h1>
@@ -36,24 +37,32 @@ const Signup = () => {
                     <form name="signin" className="form">
                         <div className="input-control">
                             <label htmlFor="email" className="input-label" hidden>Email</label>
-                            <input value={email} onChange={(e)=> setEmail(e.target.value)} type="email" name="email" id="email" className="input-field" placeholder="Email" />
+                            <input value={email} onChange={(e)=> setEmail(e.target.value)} type="email" name="email" id="email" className="input-field" placeholder="Email*" />
+
                         </div>
+                            {isValidEmail(email)=== false && <div style={{marginTop: 6, color: "#f00", padding: 16}}>Email nhân viên không được để trống</div>}
                         <div className="input-control">
                             <label htmlFor="password" className="input-label" hidden>Mật khẩu</label>
-                            <input value={password} onChange={(e)=> setPassword(e.target.value)} type="password" name="Password" id="Password" className="input-field" placeholder="Password" />
+                            <input value={password} onChange={(e)=> setPassword(e.target.value)} type="password" name="Password" id="Password" className="input-field" placeholder="Mật khẩu*" />
                         </div>
+                            {validatePassword(password)=== false && <div style={{marginTop: 6, color: "#f00", padding: 16}}>Mật khẩu nhân viên quá yếu</div>}
                         <div className="input-control">
                             <label htmlFor="Password" className="input-label" hidden>Nhập lại mật khẩu</label>
-                            <input value={confirmPassword} onChange={(e)=> setConfirmPassword(e.target.value)} type="password" name="Password" id="Password" className="input-field" placeholder="Confirm password" />
+                            <input value={confirmPassword} onChange={(e)=> setConfirmPassword(e.target.value)} type="password" name="Password" id="Password" className="input-field" placeholder="Nhập lại mật khẩu*" />
+
                         </div>
+                            {password !== confirmPassword && <div style={{marginTop: 6, color: "#f00", padding: 16}}>Mật khẩu không khớp</div>}
                         <div className="input-control">
                             <label htmlFor="First name" className="input-label" hidden>Họ</label>
-                            <input value={firstName} onChange={(e)=> setFirstName(e.target.value)} type="text" name="surname" id="surname" className="input-field" placeholder="Firstname" />
+                            <input value={firstName} onChange={(e)=> setFirstName(e.target.value)} type="text" name="surname" id="surname" className="input-field" placeholder="Họ*" />
+
                         </div>
+                            {(firstName.length)<= 0 && <div style={{marginTop: 6, color: "#f00", padding: 16}}>Họ không được để trống</div>}
                         <div className="input-control">
                             <label htmlFor="Lastname" className="input-label" hidden>Tên</label>
-                            <input value={lastName} onChange={(e)=> setLastName(e.target.value)} type="text" name="lastname" id="lastname" className="input-field" placeholder="Lastname" />
+                            <input value={lastName} onChange={(e)=> setLastName(e.target.value)} type="text" name="lastname" id="lastname" className="input-field" placeholder="Tên*" />
                         </div>
+                            {(lastName.length)<= 0 && <div style={{marginTop: 6, color: "#f00", padding: 16}}>Tên không được để trống</div>}
                         <div className="input-control">
                             <div></div>
                             <input onClick={async (e)=> {

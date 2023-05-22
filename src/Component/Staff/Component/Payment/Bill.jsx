@@ -32,7 +32,7 @@ export default function Bill(props) {
   const [data, setData] = useState();
   const [open, setOpen] = React.useState(false);
   // eslint-disable-next-line
-  const [totalBill, setTotalBill]= React.useState(0)
+  const [totalBill, setTotalBill] = React.useState(0);
   useEffect(() => {
     (async () => {
       const result = await bill.getBill(props?.order_request_id);
@@ -41,22 +41,23 @@ export default function Bill(props) {
   }, [props?.order_request_id]);
   const handleClickOpen = () => {
     setOpen(true);
-  };numberWithCommas(_.sumBy(data, (row)=> parseInt(
-                            parseInt(
-                              renderFinalValue(
-                                row?.amount_menu,
-                                row?.amount_dish,
-                                row?.id_user_booking
-                              )
-                            ) *
-                              parseInt(
-                                renderFinalValue(
-                                  row?.price,
-                                  row?.menu_price,
-                                  row?.dish_price
-                                )
-                              )
-                          )))
+  };
+  numberWithCommas(
+    _.sumBy(data, (row) =>
+      parseInt(
+        parseInt(
+          renderFinalValue(
+            row?.amount_menu,
+            row?.amount_dish,
+            row?.id_user_booking
+          )
+        ) *
+          parseInt(
+            renderFinalValue(row?.price, row?.menu_price, row?.dish_price)
+          )
+      )
+    )
+  );
 
   const handleClose = () => {
     setOpen(false);
@@ -64,7 +65,7 @@ export default function Bill(props) {
 
   return (
     <div>
-    <Dialog
+      <Dialog
         ref={componentRef}
         open={open}
         TransitionComponent={Transition}
@@ -75,9 +76,18 @@ export default function Bill(props) {
         <DialogTitle>{"Thông tin hóa đơn"}</DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-slide-description">
-            <div style={{marginBottom: 12}}>Họ và tên: <strong>{props?.user_name}</strong></div>
-            <div style={{marginBottom: 12}}>Số điện thoại: <strong>{props?.phone}</strong></div>
-            <div style={{marginBottom: 12}}>Thời gian đặt: <strong>{moment(props?.time_created).format("DD/MM/YYYY HH:mm:ss")}</strong></div>
+            <div style={{ marginBottom: 12 }}>
+              Họ và tên: <strong>{props?.user_name}</strong>
+            </div>
+            <div style={{ marginBottom: 12 }}>
+              Số điện thoại: <strong>{props?.phone}</strong>
+            </div>
+            <div style={{ marginBottom: 12 }}>
+              Thời gian đặt:{" "}
+              <strong>
+                {moment(props?.time_created).format("DD/MM/YYYY HH:mm:ss")}
+              </strong>
+            </div>
             <TableContainer component={Paper}>
               <Table sx={{ minWidth: 500 }} aria-label="simple table">
                 <TableHead>
@@ -151,23 +161,73 @@ export default function Bill(props) {
             </TableContainer>
             <br />
             <Divider />
-            <div style={{direction: "rtl"}}>Thành tiền: {numberWithCommas(_.sumBy(data, (row)=> parseInt(
-                            parseInt(
-                              renderFinalValue(
-                                row?.amount_menu,
-                                row?.amount_dish,
-                                
-                                row?.id_user_booking
-                              )
-                            ) *
-                              parseInt(
-                                renderFinalValue(
-                                  row?.price,
-                                  row?.menu_price,
-                                  row?.dish_price
-                                )
-                              )
-                          )))} VNĐ</div>
+            <div style={{ direction: "rtl" }}>
+              Tổng tiền:{" "}
+              {numberWithCommas(
+                _.sumBy(data, (row) =>
+                  parseInt(
+                    parseInt(
+                      renderFinalValue(
+                        row?.amount_menu,
+                        row?.amount_dish,
+
+                        row?.id_user_booking
+                      )
+                    ) *
+                      parseInt(
+                        renderFinalValue(
+                          row?.price,
+                          row?.menu_price,
+                          row?.dish_price
+                        )
+                      )
+                  )
+                )
+              )}{" "}
+              VNĐ
+            </div>
+            <div style={{ direction: "rtl" }}>Tiền cọc: {props?.amount_deposit}VNĐ</div>
+            <div style={{ direction: "rtl" }}>
+              Thành tiền:{" "}
+              {numberWithCommas(
+                _.sumBy(data, (row) =>
+                  parseInt(
+                    parseInt(
+                      renderFinalValue(
+                        row?.amount_menu,
+                        row?.amount_dish,
+                        row?.id_user_booking
+                      )
+                    ) *
+                      parseInt(
+                        renderFinalValue(
+                          row?.price,
+                          row?.menu_price,
+                          row?.dish_price
+                        )
+                      )
+                  )
+                ) - parseInt(props?.amount_deposit) > 0 ? _.sumBy(data, (row) =>
+                  parseInt(
+                    parseInt(
+                      renderFinalValue(
+                        row?.amount_menu,
+                        row?.amount_dish,
+                        row?.id_user_booking
+                      )
+                    ) *
+                      parseInt(
+                        renderFinalValue(
+                          row?.price,
+                          row?.menu_price,
+                          row?.dish_price
+                        )
+                      )
+                  )
+                ) - parseInt(props?.amount_deposit) : 0
+              ) }{" "}
+              VNĐ
+            </div>
             <div style={{ textAlign: "center", fontSize: 13, marginBottom: 8 }}>
               Phương thức thanh toán: Tiền mặt
             </div>
@@ -177,8 +237,11 @@ export default function Bill(props) {
             <div style={{ textAlign: "center", fontSize: 13, marginBottom: 8 }}>
               Cảm ơn! Hẹn gặp quý khách lần sau
             </div>
-            <div style={{direction: "rtl"}}>
-              Xuất hóa đơn lúc: <strong>{moment(new Date()).format("DD/MM/YYYY HH:mm:ss")}</strong>
+            <div style={{ direction: "rtl" }}>
+              Xuất hóa đơn lúc:{" "}
+              <strong>
+                {moment(new Date()).format("DD/MM/YYYY HH:mm:ss")}
+              </strong>
             </div>
           </DialogContentText>
         </DialogContent>
@@ -201,9 +264,18 @@ export default function Bill(props) {
         <DialogTitle>{"Thông tin hóa đơn"}</DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-slide-description">
-            <div style={{marginBottom: 12}}>Họ và tên: <strong>{props?.user_name}</strong></div>
-            <div style={{marginBottom: 12}}>Số điện thoại: <strong>{props?.phone}</strong></div>
-            <div style={{marginBottom: 12}}>Thời gian đặt: <strong>{moment(props?.time_created).format("DD/MM/YYYY HH:mm:ss")}</strong></div>
+            <div style={{ marginBottom: 12 }}>
+              Họ và tên: <strong>{props?.user_name}</strong>
+            </div>
+            <div style={{ marginBottom: 12 }}>
+              Số điện thoại: <strong>{props?.phone}</strong>
+            </div>
+            <div style={{ marginBottom: 12 }}>
+              Thời gian đặt:{" "}
+              <strong>
+                {moment(props?.time_created).format("DD/MM/YYYY HH:mm:ss")}
+              </strong>
+            </div>
             <TableContainer component={Paper}>
               <Table sx={{ minWidth: 500 }} aria-label="simple table">
                 <TableHead>
@@ -278,22 +350,73 @@ export default function Bill(props) {
             </TableContainer>
             <br />
             <Divider />
-            <div style={{direction: "rtl"}}>Thành tiền: {numberWithCommas(_.sumBy(data, (row)=> parseInt(
-                            parseInt(
-                              renderFinalValue(
-                                row?.amount_menu,
-                                row?.amount_dish,
-                                row?.id_user_booking
-                              )
-                            ) *
-                              parseInt(
-                                renderFinalValue(
-                                  row?.price,
-                                  row?.menu_price,
-                                  row?.dish_price
-                                )
-                              )
-                          )))} VNĐ</div>
+            <div style={{ direction: "rtl" }}>
+              Tổng tiền:{" "}
+              {numberWithCommas(
+                _.sumBy(data, (row) =>
+                  parseInt(
+                    parseInt(
+                      renderFinalValue(
+                        row?.amount_menu,
+                        row?.amount_dish,
+
+                        row?.id_user_booking
+                      )
+                    ) *
+                      parseInt(
+                        renderFinalValue(
+                          row?.price,
+                          row?.menu_price,
+                          row?.dish_price
+                        )
+                      )
+                  )
+                )
+              )}{" "}
+              VNĐ
+            </div>
+            <div style={{ direction: "rtl" }}>Tiền cọc: {props?.amount_deposit}VNĐ</div>
+            <div style={{ direction: "rtl" }}>
+              Thành tiền:{" "}
+              {numberWithCommas(
+                _.sumBy(data, (row) =>
+                  parseInt(
+                    parseInt(
+                      renderFinalValue(
+                        row?.amount_menu,
+                        row?.amount_dish,
+                        row?.id_user_booking
+                      )
+                    ) *
+                      parseInt(
+                        renderFinalValue(
+                          row?.price,
+                          row?.menu_price,
+                          row?.dish_price
+                        )
+                      )
+                  )
+                ) - parseInt(props?.amount_deposit) > 0 ? _.sumBy(data, (row) =>
+                  parseInt(
+                    parseInt(
+                      renderFinalValue(
+                        row?.amount_menu,
+                        row?.amount_dish,
+                        row?.id_user_booking
+                      )
+                    ) *
+                      parseInt(
+                        renderFinalValue(
+                          row?.price,
+                          row?.menu_price,
+                          row?.dish_price
+                        )
+                      )
+                  )
+                )- parseInt(props?.amount_deposit) : 0
+              )  }{" "}
+              VNĐ
+            </div>
             <div style={{ textAlign: "center", fontSize: 13, marginBottom: 8 }}>
               Phương thức thanh toán: Tiền mặt
             </div>
@@ -317,8 +440,6 @@ export default function Bill(props) {
           <Button onClick={handleClose}>Đóng</Button>
         </DialogActions>
       </Dialog>
-
-      
     </div>
   );
 }
@@ -335,13 +456,12 @@ export const renderFinalValue = (a, b, c, d) => {
   }
 };
 
-const renderNameValue= (a, b, c)=> {
+const renderNameValue = (a, b, c) => {
   if (a) {
     return a;
   } else if (b) {
     return b;
-  } 
-   else if (c) {
+  } else if (c) {
     return c;
   }
-}
+};

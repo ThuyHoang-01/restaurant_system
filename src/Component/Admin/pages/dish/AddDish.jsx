@@ -64,6 +64,7 @@ export default function AddDish(props) {
               onChange={(e) => setDishName(e.target.value)}
               placeholder={"Tên món ăn"}
             />
+            {dishName.length <=0 && <div style={{marginTop: 6, color: "#f00", padding: 16}}>Tên món ăn không được để trống</div>}
             <div></div>
             <br />
             <div></div>
@@ -73,6 +74,7 @@ export default function AddDish(props) {
               onChange={(e) => setDishDescription(e.target.value)}
               placeholder={"Mô tả"}
             />
+            {dishDescription.length <=0 && <div style={{marginTop: 6, color: "#f00", padding: 16}}>Mô tả món ăn không được để trống</div>}
             <div></div>
             <br />
             <div></div>
@@ -82,6 +84,7 @@ export default function AddDish(props) {
               onChange={(e) => setDishPrice(e.target.value)}
               placeholder={"Gía"}
             />
+            {dishPrice.length <=0 && <div style={{marginTop: 6, color: "#f00", padding: 16}}>Giá món ăn không được để trống</div>}
             <div></div>
             <br />
             <div></div>

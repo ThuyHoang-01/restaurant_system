@@ -9,22 +9,23 @@ import Slide from "@mui/material/Slide";
 // import { TextField } from '@mui/material';
 import swal from "sweetalert";
 import {
-  Checkbox,
-  ListItemText,
-  MenuItem,
-  OutlinedInput,
-  Select,
+  // Checkbox,
+  // ListItemText,
+  // MenuItem,
+  // OutlinedInput,
+  // Select,
   TextField,
 } from "@mui/material";
 import { Button } from "antd";
-import UploadImage from "../../../UploadImage/UploadImage";
+// import UploadImage from "../../../UploadImage/UploadImage";
 // import get_list_dish from "../../../../api/admin/get_list_dish";
 // import add_menu from "../../../../api/menu/add_menu";
-import upload_image from "../../../../api/upload_image";
-import add_dish from "../../../../api/dish/add_dish";
+// import upload_image from "../../../../api/upload_image";
+// import add_dish from "../../../../api/dish/add_dish";
 import add_staff from "../../../../api/admin/add_staff";
 import validateEmail from "../../../util/validateEmail";
 import { validatePassword } from "../../../util/validatePassword";
+import { isValidEmail, isValidMobile } from "../../../Home/AboutUs/AboutUs";
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
@@ -68,6 +69,8 @@ export default function AddStaff(props) {
               onChange={(e) => setFirstName(e.target.value)}
               placeholder={"Họ"}
             />
+            {firstName.length <=0 && <div style={{marginTop: 6, color: "#f00", padding: 16}}>Họ nhân viên không được để trống</div>}
+
             <div></div>
             <br />
             <div></div>
@@ -77,6 +80,8 @@ export default function AddStaff(props) {
               onChange={(e) => setLastName(e.target.value)}
               placeholder={"Tên"}
             />
+            {lastName.length <=0 && <div style={{marginTop: 6, color: "#f00", padding: 16}}>Tên nhân viên không được để trống</div>}
+
             <div></div>
             <br />
             <div></div>
@@ -86,6 +91,8 @@ export default function AddStaff(props) {
               onChange={(e) => setEmail(e.target.value)}
               placeholder={"Email"}
             />
+            {isValidEmail(email)=== false && <div style={{marginTop: 6, color: "#f00", padding: 16}}>Email nhân viên không được để trống</div>}
+
             <div></div>
             <br />
             <div></div>
@@ -95,6 +102,8 @@ export default function AddStaff(props) {
               onChange={(e) => setPhone(e.target.value)}
               placeholder={"Sô điện thoại"}
             />
+            {isValidMobile(phone)=== false && <div style={{marginTop: 6, color: "#f00", padding: 16}}>Số điện thoại nhân viên không được để trống</div>}
+
             <div></div>
             <br />
             <div></div>
@@ -105,6 +114,7 @@ export default function AddStaff(props) {
               onChange={(e) => setPassword(e.target.value)}
               placeholder={"Mật khẩu"}
             />
+            {validatePassword(password)=== false && <div style={{marginTop: 6, color: "#f00", padding: 16}}>Mật khẩu nhân viên quá yếu</div>}
             <div></div>
             <br />
             <div></div>
