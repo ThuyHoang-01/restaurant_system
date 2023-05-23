@@ -28,11 +28,11 @@ export  const isValidMobile = (mobileno) => {
   return phoneRegex.test(mobileno);
 };
 const Contact = () => {
-  const [contactData, setContactData] = useState({});
+  const [contactData, setContactData] = useState({}); /*Hook được sử dụng để quản lý trạng thái */
   const [errorMsg, setErrorMsg] = useState();
   const [successMsg, setSuccessMsg] = useState(false);
   const [guest, setGuest]= useState("")
-  const [type, setType]= useState("")
+  const [type, setType]= useState("") /* 4 state, bao gồm: `contactData`, `errorMsg`, `successMsg`, `guest`, `type` để lưu các dữ liệu cần thiết.*/
   const isValidName= (name)=> {
     return name?.length >= 6 ? true : false
   }
@@ -51,12 +51,12 @@ const Contact = () => {
     if (name === "mobile") {
       setContactData({
         ...contactData,
-        mobile: value.replace(/\D/, "")
+        mobile: value.replace(/\D/, "") /*cập nhật dữ liệu liên lạc*/
       });
     }
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e) => { /*xử lý nút submit*/
     let isValided = false;
     e.preventDefault();
 
@@ -72,7 +72,7 @@ const Contact = () => {
       contactData.type === "" ||
       contactData.type === undefined
     ) {
-      setSuccessMsg(false);
+      setSuccessMsg(false);  /* kiểm tra giá trị đúng -> true || thiếu value -> false*/
       isValided = false;
     } else {
       setSuccessMsg(true);

@@ -108,7 +108,7 @@ export default function NewOrderPayment(props) {
         </DialogContent>
         <DialogActions>
           <Button type={"primary"} onClick={async ()=> {
-            const result = await create_order_request(name, phone, email, deposit)
+            const result = await create_order_request(name, phone, email, deposit, new Date())
             if(result?.add=== true ) {
                 swal("Thông báo", "Bạn đã tạo đơn hàng thành công", "success")
                 .then(()=> null)

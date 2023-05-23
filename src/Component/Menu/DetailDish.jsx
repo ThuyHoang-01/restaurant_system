@@ -16,16 +16,21 @@ import Swal from "sweetalert2";
 import book_dish from "../../api/book/book_dish";
 
 const Transition = React.forwardRef(function Transition(props, ref) {
-  return <Slide direction="up" ref={ref} {...props} />;
+  return <Slide direction="up" ref={ref} {...props} />; //sử dụng component `Transition` trong ứng dụng, 
+//có thể truy cập các thuộc tính và phương thức của `Slide` thông qua `ref`, để thao tác và tương tác với `Slide`.
 });
 
-export default function DetailDish(props) {
+export default function DetailDish(props) { 
   const { auth, user, setOrderId, orderId } = React.useContext(AppContext);
-  
-  const [data, setData] = React.useState();
+  //auth`, `user` là các giá trị được lưu trong `AppContext` đề cập tới trạng thái xác thực và thông tin của người dùng.
+  // setOrderId`, `orderId` là hai biến được sử dụng với mục đích thiết lập và lưu lại Id của đơn hàng.
+  // / `useContext`, React sẽ tự động quản lý việc "subscribe" và "unsubscribe" khi các giá trị trong context 
+
+  const [data, setData] = React.useState(); //
+  //  React state `data` và `setData` để lưu trữ dữ liệu được trả về từ API.
   React.useEffect(() => {
     (async () => {
-      const result = await get_detail_dish(props?.dishId);
+      const result = await get_detail_dish(props?.dishId); // t` để thực hiện lấy dữ liệu từ `get_detail_dish()` API thông qua `async/await`
       return setData(result)
     })();
   }, [props?.dishId, props?.open]);
@@ -33,6 +38,9 @@ export default function DetailDish(props) {
   const handleClose = () => {
     props?.setOpen(false);
   };
+  // code trên thực hiện việc lấy thông tin chi tiết của món ăn ngay 
+  //khi component được render, hiển thị nó trên giao diện và cho phép đóng modal
+  // khi người dùng ấn vào nút đóng.
 
   return (
     <div>
@@ -43,13 +51,13 @@ export default function DetailDish(props) {
         onClose={handleClose}
         aria-describedby="alert-dialog-slide-description"
       >
-        <DialogTitle>{data?.dish_name}</DialogTitle>
+        <DialogTitle>{data?.dish_name}</DialogTitle> {/*  DialogTitle hiển thị tên của món ăn*/}
         <DialogContent>
-          <DialogContentText id="alert-dialog-slide-description">
+          <DialogContentText id="alert-dialog-slide-description"> {/*DialogContentText hiển thị mô tả và giá của món ăn*/}
             <Image src={data?.image_dish} style={{width: 450, aspectRatio: 3 / 2, objectFit: "cover", zIndex: 99999}} />
             <Box>
                 <div style={{margin: "10px 0"}}>Mô tả: {data?.dish_description}</div>
-                <div style={{margin: "10px 0"}}>Giá: <span style={{color: "red"}}>{numberWithCommas(parseInt(data?.dish_price))}đ</span></div>
+                <div style={{margin: "10px 0"}}>Giá: <span style={{color: "red"}}>{numberWithCommas(parseInt(data?.dish_price))}đ</span></div> {/* hiển thị giá , nhập số nguyên + , + đ */}
 
             </Box>
           </DialogContentText>
@@ -76,13 +84,13 @@ export default function DetailDish(props) {
                         if (auth === true) {
                             try {
                               const result = await book_dish(
-                                props?.dishId, parseInt(text), orderId
+                                props?.dishId, parseInt(text), orderId // get api trar veef 
                               ) 
                               if(result?.status=== 200) {
                                 swal("Thông báo", "Đặt món thành công", "success")
                               }
                               else {
-                                swal("Thông báo", "Lỗi không xác định", "error")
+                                swal("Thông báo", "Lỗi không xác định", "error") // swal alert that bai
                               }
                             }
                             catch(e) {

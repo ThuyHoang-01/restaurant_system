@@ -32,8 +32,9 @@ const Menu = ({ item }) => {
         <div style={{ fontSize: 20, color: "#fff" }}>{item?.menu_name}</div>
         <div style={{ color: "#fff" }}>
           {numberWithCommas(
-            _.sumBy(JSON.parse(item?.menu_dishes), function (e) {
-              return parseInt(e?.price);
+            _.sumBy(JSON.parse(item?.menu_dishes), function (e) { 
+              return parseInt(e?.price); 
+              /*  hiển thị giá kiểu số nguyên + VNĐ*/
             })
           )}{" "}
           VNĐ

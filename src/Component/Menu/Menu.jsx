@@ -17,35 +17,39 @@ import { AppContext } from "../../App";
 const { Title } = Typography;
 
 const Menu = () => {
-  const { auth, user, setOrderId, orderId } = useContext(AppContext);
-  const {category_id }= useParams()
-  const [data, setData] = useState([]);
-  useEffect(() => {
+  const { auth, user, setOrderId, orderId } = useContext(AppContext); //`useContext` sẽ lấy ra các giá trị đã được cung cấp bởi `AppContext`, bao gồm các giá trị `auth`, `user`, `setOrderId`, `orderId`.
+  const {category_id }= useParams() //sẽ lấy ra các parameters trong URL.
+  const [data, setData] = useState([]); //sẽ khởi tạo một state để quản lý dữ liệu trạng thái cho component.
+  useEffect(() => { //sẽ được sử dụng để gọi hàm lấy danh sách món ăn, 
+    //được cung cấp bởi hàm `get_list_dish(category_id)`, lần đầu tiên khi component được hiển thị hoặc thay đổi giá trị `category_id`.
+
     (async () => {
       const result = await get_list_dish(category_id);
       return setData(result);
     })();
   }, [category_id]);
-  const location= useLocation()
-  const navigate = useNavigate();
-  const [itemOffset, setItemOffset] = useState(0);
-  const endOffset = itemOffset + 8;
+  
+  const location= useLocation() // lấy ra thông tin hiện tại của trang
+  const navigate = useNavigate(); // chuyển hướng đến các URL khác trong ứng dụng
+  const [itemOffset, setItemOffset] = useState(0);//itemOffset` chứa số thứ tự của item đầu tiên được hiển thị trên trang.
+  const endOffset = itemOffset + 8; // 8 món mỗi trang
   // eslint-disable-next-line
-  const currentItems = data.slice(itemOffset, endOffset);
+  const currentItems = data.slice(itemOffset, endOffset); //hiển thị danh sách các món ăn ứng với vị trí mới.
   // eslint-disable-next-line
-  const pageCount = Math.ceil(data.length / 8);
+  const pageCount = Math.ceil(data.length / 8); 
   // eslint-disable-next-line
   const handlePageClick = (event) => {
-    const newOffset = (event.selected * 8) % data.length;
+    const newOffset = (event.selected * 8) % data.length; //lấy số thứ tự của trang được chọn * số lượng phần tử trên một trang.Sau đó, kết quả này sẽ được lấy phần dư với số lượng phần tử trong danh sách `data` để đảm bảo vị trí offset không vượt quá giới hạn của danh sách
     setItemOffset(newOffset);
   };
   useEffect(()=> {
     if(location.state?.order_id) {
-      setOrderId(location.state?.order_id)
+      setOrderId(location.state?.order_id) //cập nhật `setOrderId` khi giá trị `location.state?.order_id` thay đổi. `location
     }
   }, [location.state])
-  useEffect(()=> {
+      useEffect(()=> {
   })
+  //`order_id` truyền vào ko phải null và undefined, `setOrderId` sẽ được sử dụng để cập nhật giá trị `orderId` mới.
 
   return (
     <>
@@ -83,9 +87,11 @@ const Menu = () => {
                     alignItems: "center",
                   }}
                 >
-                  <Title level={4}>{item?.dish_name}</Title>
+                  <Title level={4}>{item?.dish_name}</Title> 
+                  {/* hiển thị tiêu đề với kích cỡ khác nhau trong ứng dụng. */}
                   <Title level={4} style={{ color: "red" }}>
-                    {numberWithCommas(item?.dish_price)}đ
+                    {numberWithCommas(item?.dish_price)}đ 
+                    {/* hien thi giá món ăn , theo định dạng dấu phẩy và đ */}
                   </Title>
                 </Box>
                 {

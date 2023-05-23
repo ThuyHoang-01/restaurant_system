@@ -6,11 +6,11 @@ import SearchIcon from '@mui/icons-material/Search';
 const DetailDish = React.lazy(() => import('./DetailDish'));
 
 export default function SearchItemMenu(props) {
-  const [open, setOpen]= React.useState(false)
-  const [dishId, setDishId]= React.useState(undefined)
+  const [open, setOpen]= React.useState(false) // ktra popup có hiển thị ko
+  const [dishId, setDishId]= React.useState(undefined) // khơi tạo vs gtri ban đâu undefind
   return (
     <Stack spacing={2} sx={{ width: 300 }}>
-      <Autocomplete
+      <Autocomplete // nếu xử lý ko có trả lỗi
         onChange={(e, value)=> {
           setOpen(()=> true)
           setDishId(value.dish_id)
@@ -19,15 +19,15 @@ export default function SearchItemMenu(props) {
         freeSolo
         id="free-solo-2-demo"
         disableClearable
-        getOptionLabel={(option) => option.dish_name}
-        options={props?.data}
+        getOptionLabel={(option) => option.dish_name} //hiển thị tên món ăn theo tùy chọn
+        options={props?.data} // truyền ds các món ăn vào component
         renderInput={(params) => (
           <div>
             <TextField
               {...params}
               label={<><SearchIcon /> Tìm kiếm món ăn</>}
               InputProps={{
-                ...params.InputProps,
+                ...params.InputProps, // input value search
                 type: 'search',
               }}
           />
@@ -35,7 +35,8 @@ export default function SearchItemMenu(props) {
         )}
       />
         <React.Suspense fallback={<></>}>
-            <DetailDish open={open} setOpen={setOpen} dishId={dishId} />
+            <DetailDish open={open} setOpen={setOpen} dishId={dishId} /> 
+            {/* show popup */}
         </React.Suspense>
     </Stack>
   );
