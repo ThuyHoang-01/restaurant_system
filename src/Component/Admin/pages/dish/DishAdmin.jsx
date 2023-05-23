@@ -55,7 +55,7 @@ const DishAdmin  = () => {
     { field: "dish_price", headerName: "Giá", width: 200, flex: 1 },
     {
       field: "image_dish",
-      headerName: "Hình ảnh menu",
+      headerName: "Hình ảnh món ăn",
       width: 200,
       flex: 1,
       renderCell: (params)=> {

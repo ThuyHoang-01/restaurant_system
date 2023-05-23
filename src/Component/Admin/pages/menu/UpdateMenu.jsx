@@ -31,9 +31,11 @@ export default function UpdateMenu(props) {
   const [listDishChoose, setListDishChoose] = React.useState([]);
   const [listDish, setListDish] = React.useState([]);
   const handleChange = (e) => {
+    console.log("target", e.target)
     const { name, value } = e.target;
     setListDishChoose(typeof value === "string" ? value.split(",") : value);
   };
+  // console.log(listDishChoose)
   React.useEffect(()=> {
     setId(props?.id)
     setMenuName(props?.menu_name)
@@ -104,7 +106,6 @@ export default function UpdateMenu(props) {
             <br />
             <div></div>
             <Select
-              onChange={handleChange}
               value={listDishChoose}
               displayEmpty
               inputProps={{ "aria-label": "Without label" }}
@@ -120,14 +121,26 @@ export default function UpdateMenu(props) {
               }}
               multiple
             >
-              {listDish?.map((item) => (
-                <MenuItem value={item} key={item.dish_name}>
+              {/* {console.log("list dish", listDish)} */}
+              {/* {console.log("List dish choose", listDishChoose)} */}
+              {listDish?.filter(item=> parseInt(item.mode)=== 0)?.map((item, index) => (
+                <MenuItem key={index} value={item} onClick={()=> {
+                  if(listDishChoose.filter((item3) => item3?.dish_name === item?.dish_name)?.length > 0 ) {
+                    setListDishChoose(listDishChoose?.filter(item2=> item2.dish_id != item.dish_id))
+                  }
+                  else {
+                    setListDishChoose(listDishChoose?.concat([{...item}]))
+
+                  }
+                 
+                }}>
                   {/* {item.dish_name} */}
+                  {/* {console.log(listDishChoose?.filter(item3=> item3?.dish_id=== item?.dish_id).length >0 ? true: false)} */}
+                  {console.log(listDishChoose)}
                   <Checkbox
+                  
                     checked={
-                      listDishChoose
-                        .map((item) => item?.dish_name)
-                        .indexOf(item.dish_name) > -1
+                      listDishChoose?.filter(item3=> item3?.dish_id=== item?.dish_id).length >0 ? true: false
                     }
                   />
                   <ListItemText primary={item.dish_name} />
@@ -142,7 +155,7 @@ export default function UpdateMenu(props) {
             onClick={async () => {
               if(image?.thumbUrl) {
                 const imageFinal= await upload_image(image?.thumbUrl)
-                console.log(listDish)
+                // console.log(listDish)
                 const result = await update_menu(menuName, menuDescription, imageFinal?.img, id, listDishChoose);
                 if (result?.update === true) {
                   swal("Thông báo", "Cập nhật thành công", "success").then(() => {
