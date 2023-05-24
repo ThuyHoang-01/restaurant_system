@@ -1,1 +1,1 @@
-export const API_URL= "https://yummypro.vercel.app/"
+export const API_URL= "https://yummypro.onrender.com"
