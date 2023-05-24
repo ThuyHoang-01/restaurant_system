@@ -6,7 +6,7 @@ const request_booking= async (userName, email, phone, guest, type)=> {
         url: API_URL+ "/api/v1/request/booking",
         method: "post",
         data: {
-            userName, email, phone, guest, type
+            userName, email, phone, guest, type, time_created: new Date()
         }
     })
     const result= await res.data
