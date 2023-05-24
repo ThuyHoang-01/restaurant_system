@@ -25,7 +25,7 @@ const Order = () => {
             textAlign: "center",
           }}
         >
-          Menu đặt tiệc món
+          Quản lý đặt bàn 
         </div>
         <Box
           sx={{
