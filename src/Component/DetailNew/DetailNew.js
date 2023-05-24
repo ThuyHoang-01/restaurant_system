@@ -23,20 +23,19 @@ const DetailNew = () => {
     <>
         <Header />
         <div className={"c-flex-center"} style={{width: "100%"}}>
-          <div style={{width: "100%", maxWidth: 1200, display: "flex"}}> // Chiều rộng đoạn văn không lớn hơn 1200
+          <div style={{width: "100%", maxWidth: 1200, display: "flex"}}> {/*Chiều rộng đoạn văn không lớn hơn 1200*/}
             <div style={{width: "100%", padding: 20}}>
                 <div style={{margin: "12px 0", fontWeight: 600, fontSize: 24, textTransform: "uppercase"}}>
-                    {data?.title}  // lấy tên tiêu đề
+                    {data?.title}  {/*lấy tên tiêu đề*/}
                 </div>
                 <div></div>
                 <br />
                 <div></div>
                 <div style={{display: "flex", alignItems: "center", gap: 10}}>
                         <CalendarMonthIcon /> {moment(data?.time_created).format("DD/MM/YYYY")} // 
-                      </div> // Lấy ra thời gian tạo tin tức
+                      </div> {/* Lấy ra thời gian tạo tin tức */}
                 <br />
                 <div style={{overflow: "hidden", textOverflow: "ellipsis"}} dangerouslySetInnerHTML={{__html: data?.content}}></div>
-                //
             </div>
             <div style={{width: 700}}>
               <div style={{fontSize: 24, fontWeight: 600, paddingLeft: 52, marginTop: 20}}>Bài viết mới nhất</div>
